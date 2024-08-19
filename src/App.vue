@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style>
-/* Global styles can be added here if needed */
+@import url(../Styles/styles.css);
 </style>
