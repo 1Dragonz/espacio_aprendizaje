@@ -5,21 +5,22 @@
       <h1 class="title">ESPACIOS DE APRENDIZAJE</h1>
       <p class="subtitle">Selecciona el espacio de aprendizaje que quieras desarrollar.</p>
       <div class="buttons">
-        <button class="button button-math" @click="selectSpace('matematica')">MATEMATICA</button>
-        <button class="button button-chemistry" @click="selectSpace('quimica')">QUIMICA</button>
+        <router-link to="/matematica">
+        <button class="button button-math">MATEMATICA</button>
+        </router-link>
+
+        <router-link to="/matematica">
+        <button class="button button-chemistry">QUIMICA</button>
+      </router-link>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
 export default {
   name: 'EspaciosAprendizaje',
-  methods: {
-    selectSpace(space) {
-      alert(`Has seleccionado el espacio de aprendizaje: ${space}`);
-    },
-  },
 };
 </script>
 
