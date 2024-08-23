@@ -2,6 +2,22 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 
+
+
+import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+
+
+
 //componentes
 import EspaciosAprendizaje from './components/EspaciosAprendizaje.vue'
 import MatematicaComponent from './components/MatematicaComponent.vue'
@@ -27,5 +43,6 @@ const router = createRouter({
 const app = createApp(App)
 
 app.use(router)
+app.use(vuetify)
 
 app.mount('#app')
