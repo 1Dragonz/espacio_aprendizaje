@@ -7,7 +7,7 @@
         <v-icon color="white">mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" :style="{ backgroundColor: 'rgba(170, 170, 170, 0.15)' }">
+    <v-navigation-drawer v-model="drawer" :style="{  }">
       <v-list>
         <v-list-item-group v-model="selectedTopic">
           <v-list-item v-for="(item, index) in items" :key="index" @click="selectTopic(item)"
