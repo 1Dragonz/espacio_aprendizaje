@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-app-bar app class="app-bar">
+      <router-link to="/" class="white--text">
       <v-toolbar-title class="white--text">Matematicas</v-toolbar-title>
+    </router-link>
       <v-spacer></v-spacer>
       <v-btn icon @click="drawer = !drawer">  
         <v-icon color="white">mdi-menu</v-icon>
@@ -378,6 +380,7 @@ export default {
 
 .white--text {
   color: white !important;
+  margin-left: 10px;
 }
 </style>
 
