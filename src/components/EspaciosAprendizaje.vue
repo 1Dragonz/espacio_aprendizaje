@@ -9,7 +9,7 @@
         <button class="button button-math">MATEMATICA</button>
         </router-link>
 
-        <router-link to="/matematica">
+        <router-link to="/quimica">
         <button class="button button-chemistry">QUIMICA</button>
       </router-link>
       </div>

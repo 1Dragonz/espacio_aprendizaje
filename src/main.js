@@ -21,6 +21,7 @@ const vuetify = createVuetify({
 //componentes
 import EspaciosAprendizaje from './components/EspaciosAprendizaje.vue'
 import MatematicaComponent from './components/MatematicaComponent.vue'
+import QuimicaComponent from './components/QuimicaComponent.vue'
 //definir objetos rutas -- Configuracion
 const routes =[
 {
@@ -29,6 +30,9 @@ const routes =[
 {  
     path:'/matematica',component: MatematicaComponent,
 },
+{
+    path: '/quimica', component: QuimicaComponent,
+}
 ]
 
 // crer objeto rutas de vue router --- objetos VR
