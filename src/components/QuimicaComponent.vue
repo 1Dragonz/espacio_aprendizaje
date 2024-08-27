@@ -22,8 +22,30 @@
                 {{ item.title }}
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+  <a href="https://main--tablaperiodica-quimica.netlify.app/" style="text-decoration: none;">
+    <v-row align="center" no-gutters>
+      <v-col cols="auto">
+        <v-list-item-icon>
+          <v-icon color="#66bb6a">mdi-atom</v-icon>
+        </v-list-item-icon>
+      </v-col>
+      <v-col>
+        <v-list-item-title :style="{ color: '#66bb6a' }">
+          Tabla Periodica
+        </v-list-item-title>
+      </v-col>
+    </v-row>
+  </a>
+</v-list-item>
+
+
           </v-list-item-group>
         </v-list>
+        <v-btn class="text-none" prepend-icon="mdi-atom" variant="text" border color="black" >
+        Ejercicios
+        </v-btn>
+    
       </v-navigation-drawer>
       <v-main>
         <v-container>
@@ -286,6 +308,11 @@
   .white--text {
     color: white !important;
     margin-left: 10px;
+  }
+
+  .text-none{
+    height: 50px;
+    margin-left: 50px;
   }
   </style>
   

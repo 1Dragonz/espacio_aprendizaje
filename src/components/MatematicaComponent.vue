@@ -24,6 +24,9 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
+      <v-btn class="text-none" prepend-icon="mdi-calculator" variant="text" border color="black" >
+        Ejercicios
+        </v-btn>
     </v-navigation-drawer>
     <v-main>
       <v-container>
@@ -381,6 +384,11 @@ export default {
 .white--text {
   color: white !important;
   margin-left: 10px;
+}
+
+.text-none{
+  height: 50px;
+  margin-left: 50px;
 }
 </style>
 
