@@ -2,31 +2,33 @@
   <v-app>
     <v-app-bar app class="app-bar">
       <router-link to="/" class="white--text">
-      <v-toolbar-title class="white--text">Matematicas</v-toolbar-title>
-    </router-link>
+        <v-toolbar-title class="white--text">Matemáticas</v-toolbar-title>
+      </router-link>
       <v-spacer></v-spacer>
-      <v-btn icon @click="drawer = !drawer">  
+      <v-btn icon @click="drawer = !drawer">
         <v-icon color="white">mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" :style="{  }">
+    <v-navigation-drawer v-model="drawer">
       <v-list>
         <v-list-item-group v-model="selectedTopic">
           <v-list-item v-for="(item, index) in items" :key="index" @click="selectTopic(item)"
-                       :style="{ backgroundColor: selectedTopic === item ? 'rgba(255, 112, 67, 0.16)' : '' }">
-       
+            :style="{ backgroundColor: selectedTopic === item ? 'rgba(255, 112, 67, 0.16)' : '' }">
             <v-list-item-title :style="{ color: selectedTopic === item ? '#FF7043' : 'inherit' }">
               <v-list-item-icon>
-              <v-icon color="">mdi-calculator</v-icon>
-            </v-list-item-icon>
+                <v-icon>mdi-calculator</v-icon>
+              </v-list-item-icon>
               {{ item.title }}
             </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
-      <v-btn class="text-none" prepend-icon="mdi-calculator" variant="text" border color="black" >
+
+
+      <v-btn class="text-none" prepend-icon="mdi-atom" variant="text" border color="black" @click="openSheet">
         Ejercicios
-        </v-btn>
+      </v-btn>
+      
     </v-navigation-drawer>
     <v-main>
       <v-container>
@@ -65,15 +67,30 @@
         </div>
       </v-container>
     </v-main>
+
+    <!-- Integrar el componente del sheet -->
+   <v-bottom-sheet v-model="sheet">
+    <exercise-sheet @close="sheet = false"></exercise-sheet>
+   </v-bottom-sheet>
+
+
   </v-app>
 </template>
 
 <script>
+import ExerciseSheet from './EjercicioMatematicas.vue';
+
 export default {
+  components: {
+    ExerciseSheet,
+  },
   data() {
     return {
       drawer: true,
+      sheet: false,
       subtopicTab: 0,
+      selectedTopic: null,
+      currentSubtopic: null,
       items: [
         {
           title: 'Aritmética',
@@ -351,24 +368,18 @@ export default {
   ]
 }
       ],
-      selectedTopic: null,
-      currentSubtopic: null,
     };
   },
   methods: {
+    openSheet() {
+      this.sheet = true;
+    },
     selectTopic(item) {
       this.selectedTopic = item;
       this.subtopicTab = 0; 
       this.currentSubtopic = item.subtopics[this.subtopicTab]; 
-    },
-  },
-  watch: {
-    subtopicTab(val) {
-      if (this.selectedTopic) {
-        this.currentSubtopic = this.selectedTopic.subtopics[val];
-      }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -386,10 +397,8 @@ export default {
   margin-left: 10px;
 }
 
-.text-none{
+.text-none {
   height: 50px;
   margin-left: 50px;
 }
 </style>
-
-

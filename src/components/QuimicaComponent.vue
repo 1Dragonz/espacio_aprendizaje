@@ -1,99 +1,114 @@
 <template>
-    <v-app>
-      <v-app-bar app class="app-bar">
-        <router-link to="/" class="white--text">
-        <v-toolbar-title class="white--text">Quimica</v-toolbar-title>
+  <v-app>
+    <v-app-bar app class="app-bar">
+      <router-link to="/" class="white--text">
+        <v-toolbar-title class="white--text">Química</v-toolbar-title>
       </router-link>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="drawer = !drawer">  
-          <v-icon color="white">mdi-menu</v-icon>
-        </v-btn>
-      </v-app-bar>
-      <v-navigation-drawer v-model="drawer" :style="{  }">
-        <v-list>
-          <v-list-item-group v-model="selectedTopic">
-            <v-list-item v-for="(item, index) in items" :key="index" @click="selectTopic(item)"
-                         :style="{ backgroundColor: selectedTopic === item ? 'rgba(102, 187, 106, 0.16)' : '' }">
-         
-              <v-list-item-title :style="{ color: selectedTopic === item ? '#66bb6a' : 'inherit' }">
-                <v-list-item-icon>
-                <v-icon color="">mdi-atom</v-icon>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="drawer = !drawer">
+        <v-icon color="white">mdi-menu</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer">
+      <v-list>
+        <v-list-item-group v-model="selectedTopic">
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+            @click="selectTopic(item)"
+            :style="{ backgroundColor: selectedTopic === item ? 'rgba(102, 187, 106, 0.16)' : '' }"
+          >
+            <v-list-item-title :style="{ color: selectedTopic === item ? '#66bb6a' : 'inherit' }">
+              <v-list-item-icon>
+                <v-icon>mdi-atom</v-icon>
               </v-list-item-icon>
-                {{ item.title }}
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-  <a href="https://main--tablaperiodica-quimica.netlify.app/" style="text-decoration: none;">
-    <v-row align="center" no-gutters>
-      <v-col cols="auto">
-        <v-list-item-icon>
-          <v-icon color="#66bb6a">mdi-atom</v-icon>
-        </v-list-item-icon>
-      </v-col>
-      <v-col>
-        <v-list-item-title :style="{ color: '#66bb6a' }">
-          Tabla Periodica
-        </v-list-item-title>
-      </v-col>
-    </v-row>
-  </a>
-</v-list-item>
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item>
 
+          <!-- Ejemplo de item para acceder a la tabla periódica -->
+          <v-list-item>
+            <a href="https://main--tablaperiodica-quimica.netlify.app/" style="text-decoration: none;">
+              <v-row align="center" no-gutters>
+                <v-col cols="auto">
+                  <v-list-item-icon>
+                    <v-icon color="#66bb6a">mdi-atom</v-icon>
+                  </v-list-item-icon>
+                </v-col>
+                <v-col>
+                  <v-list-item-title :style="{ color: '#66bb6a' }">
+                    Tabla Periódica
+                  </v-list-item-title>
+                </v-col>
+              </v-row>
+            </a>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
 
-          </v-list-item-group>
-        </v-list>
-        <v-btn class="text-none" prepend-icon="mdi-atom" variant="text" border color="black" >
+      <!-- Botón de ejercicios -->
+      <v-btn class="text-none" prepend-icon="mdi-atom" variant="text" border color="black" @click="openSheet">
         Ejercicios
-        </v-btn>
-    
-      </v-navigation-drawer>
-      <v-main>
-        <v-container>
-          <div v-if="selectedTopic">
-            <v-tabs v-model="subtopicTab">
-              <v-tab
-                v-for="(subtopic, index) in selectedTopic.subtopics"
-                :key="index"
-                @click="currentSubtopic = subtopic"
-                :style="{ color: subtopicTab === index ? '#66bb6a' : 'inherit' }"
-              >
-                {{ subtopic.title }}
-              </v-tab>
-            </v-tabs>
-            <v-card v-if="currentSubtopic">
-              <v-card-title>{{ currentSubtopic.title }}</v-card-title>
-              <v-card-text>
-                <p>{{ currentSubtopic.content }}</p>
-                <v-img
-                  :src="currentSubtopic.image"
-                  v-if="currentSubtopic.image"
-                  max-width="400"
-                ></v-img>
-                <div class="video-container">
-                  <iframe
-                    v-if="currentSubtopic.video"
-                    :src="currentSubtopic.video"
-                    width="100%"
-                    height="315"
-                    frameborder="0"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </v-card-text>
-            </v-card>
-          </div>
-        </v-container>
-      </v-main>
-    </v-app>
-  </template>
+      </v-btn>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container>
+        <!-- Contenido principal aquí -->
+        <div v-if="selectedTopic">
+          <v-tabs v-model="subtopicTab">
+            <v-tab
+              v-for="(subtopic, index) in selectedTopic.subtopics"
+              :key="index"
+              @click="currentSubtopic = subtopic"
+              :style="{ color: subtopicTab === index ? '#66bb6a' : 'inherit' }"
+            >
+              {{ subtopic.title }}
+            </v-tab>
+          </v-tabs>
+          <v-card v-if="currentSubtopic">
+            <v-card-title>{{ currentSubtopic.title }}</v-card-title>
+            <v-card-text>
+              <p>{{ currentSubtopic.content }}</p>
+              <v-img :src="currentSubtopic.image" v-if="currentSubtopic.image" max-width="400"></v-img>
+              <div class="video-container">
+                <iframe
+                  v-if="currentSubtopic.video"
+                  :src="currentSubtopic.video"
+                  width="100%"
+                  height="315"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </v-card-text>
+          </v-card>
+        </div>
+      </v-container>
+    </v-main>
+
+    <!-- Bottom Sheet -->
+    <v-bottom-sheet v-model="sheet">
+      <exercise-sheet @close="sheet = false"></exercise-sheet>
+    </v-bottom-sheet>
+  </v-app>
+</template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        drawer: true,
-        subtopicTab: 0,
-        items: [
+<script>
+import ExerciseSheet from './EjercicioQuimica.vue'; // Asegúrate de ajustar la ruta si es necesario
+
+export default {
+  components: {
+    ExerciseSheet,
+  },
+  data() {
+    return {
+      drawer: true,
+      sheet: false,
+      subtopicTab: 0,
+      selectedTopic: null,
+      currentSubtopic: null,
+items: [
         {
           title: 'Química',
           subtopics: [
@@ -275,26 +290,20 @@
   
           
         ],
-        selectedTopic: null,
-        currentSubtopic: null,
-      };
+    };
+  },
+  methods: {
+    openSheet() {
+      this.sheet = true;
     },
-    methods: {
-      selectTopic(item) {
-        this.selectedTopic = item;
-        this.subtopicTab = 0; 
-        this.currentSubtopic = item.subtopics[this.subtopicTab]; 
-      },
+    selectTopic(item) {
+      this.selectedTopic = item;
+      this.subtopicTab = 0;
+      this.currentSubtopic = item.subtopics[0];
     },
-    watch: {
-      subtopicTab(val) {
-        if (this.selectedTopic) {
-          this.currentSubtopic = this.selectedTopic.subtopics[val];
-        }
-      },
-    },
-  };
-  </script>
+  },
+};
+</script>
   
   <style scoped>
   .app-bar {
